@@ -1,18 +1,25 @@
 import { useContext } from 'react';
 import Spinner from '../layout/Spinner';
 import UserItem from './UserItem';
+import NoResult from './NoResult';
 import GithubContext from '../../context/github/GithubContext';
 
 function UserResults() {
 
-  const { users, loading } = useContext(GithubContext);
+  const { users, loading, noUsers } = useContext(GithubContext);
+
 
   if (!loading) {
-    return <div className='grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
-      {users.map((user) => (
-        <UserItem key={user.id} user={user} />
-      ))}
-    </div>;
+    return <>
+      <div className='grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
+        {users.map((user) => (
+          <UserItem key={user.id} user={user} />
+        ))}
+      </div>
+      {noUsers && (
+        <NoResult />
+      )}
+    </>;
   } else {
     return <Spinner />;
   }

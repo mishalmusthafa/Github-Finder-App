@@ -10,6 +10,7 @@ export const GithubProvider = ({ children }) => {
     users: [],
     user: {},
     repos: [],
+    noUsers: false,
     loading: false,
   };
 
@@ -20,6 +21,7 @@ export const GithubProvider = ({ children }) => {
     setLoading();
     const params = new URLSearchParams({
       q: text
+
     });
     const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
       headers: {
@@ -29,10 +31,22 @@ export const GithubProvider = ({ children }) => {
 
     const { items } = await response.json();
 
-    dispatch({
-      type: 'GET_USERS',
-      payload: items
-    });
+    if (items.length > 0) {
+      dispatch({
+        type: 'GET_USERS',
+        payload: items
+      });
+    } else {
+      dispatch({
+        type: 'NO_USERS'
+      });
+
+      setTimeout(() => {
+        dispatch({
+          type: 'REMOVE_NO_USER'
+        });
+      }, 3000);
+    }
 
   };
 
@@ -100,6 +114,7 @@ export const GithubProvider = ({ children }) => {
     loading: state.loading,
     user: state.user,
     repos: state.repos,
+    noUsers: state.noUsers,
     searchUsers,
     clearUsers,
     getUser,

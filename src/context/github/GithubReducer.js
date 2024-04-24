@@ -6,6 +6,7 @@ const githubReducer = (state, action) => {
       return {
         ...state,
         users: action.payload,
+        noUsers: false,
         loading: false,
       };
 
@@ -13,6 +14,22 @@ const githubReducer = (state, action) => {
       return {
         ...state,
         user: action.payload,
+        loading: false,
+      };
+
+    case 'NO_USERS':
+      return {
+        ...state,
+        users: [],
+        noUsers: true,
+        loading: false
+      };
+
+    case 'REMOVE_NO_USERS':
+      return {
+        ...state,
+        users: [],
+        noUsers: false,
         loading: false
       };
 
