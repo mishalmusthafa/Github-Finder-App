@@ -8,7 +8,7 @@ function UserSearch() {
 
   const [text, setText] = useState('');
 
-  const { users, dispatch, clearUsers } = useContext(GithubContext);
+  const { users, dispatch } = useContext(GithubContext);
   const { setAlert } = useContext(AlertContext);
   const { setInfo } = useContext(InfoContext);
 
@@ -33,7 +33,6 @@ function UserSearch() {
     }
   };
 
-
   return <>
     {users.length === 0 && (
       <h2 className='text-5xl font-bold mb-10'>
@@ -55,11 +54,14 @@ function UserSearch() {
       </form>
       <div>
         {users.length > 0 &&
-          (<button onClick={clearUsers} className="btn btn-ghost btn-lg">
+          (<button onClick={() => {
+            dispatch({
+              type: 'CLEAR_USERS'
+            });
+          }} className="btn btn-ghost btn-lg">
             Clear
           </button>
           )}
-
       </div>
     </div>
   </>;
