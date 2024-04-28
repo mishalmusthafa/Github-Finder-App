@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import TypeMe, { LineBreak, Delete } from 'react-typeme';
+import TypeMe from 'react-typeme';
 import GithubContext from '../../context/github/GithubContext';
 import AlertContext from '../../context/alert/AlertContext';
 import InfoContext from '../../context/info/InfoContext';
@@ -37,7 +37,7 @@ function UserSearch() {
     {users.length === 0 && (
       <h2 className='text-5xl font-bold mb-10'>
         <TypeMe>
-          Ennter Github Username
+          Enter Github Username
         </TypeMe>
       </h2>
     )}
