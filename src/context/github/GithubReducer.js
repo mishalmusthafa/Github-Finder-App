@@ -11,7 +11,6 @@ const githubReducer = (state, action) => {
       };
 
     case 'GET_USER_AND_REPOS':
-      console.log(action.payload);
       return {
         ...state,
         user: action.payload.user,
