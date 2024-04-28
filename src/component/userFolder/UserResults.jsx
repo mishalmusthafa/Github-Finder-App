@@ -1,13 +1,10 @@
 import { useContext } from 'react';
 import Spinner from '../layout/Spinner';
 import UserItem from './UserItem';
-import NoResult from './NoResult';
 import GithubContext from '../../context/github/GithubContext';
 
 function UserResults() {
-
-  const { users, loading, noUsers } = useContext(GithubContext);
-
+  const { users, loading } = useContext(GithubContext);
 
   if (!loading) {
     return <>
@@ -16,9 +13,7 @@ function UserResults() {
           <UserItem key={user.id} user={user} />
         ))}
       </div>
-      {noUsers && (
-        <NoResult />
-      )}
+
     </>;
   } else {
     return <Spinner />;
